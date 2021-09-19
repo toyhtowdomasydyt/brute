@@ -1,8 +1,8 @@
-from itertools import product, islice
-from hashlib import sha224
 from random import SystemRandom
+from itertools import product
+from hashlib import sha224
+from Loader import Loader
 
-import multiprocessing as ml
 import string
 import time
 
@@ -27,21 +27,24 @@ def brute(passwords, org_hash):
 
 def main():
     alphabet = string.ascii_letters
-    strength = 4
+    strength = 5
 
-    # org_pass = ''.join(SystemRandom().choice(string.ascii_letters) for _ in range(strength))
-    org_pass = 'MwwX'
+    # Generate password and its hash
+    org_pass = ''.join(SystemRandom().choice(string.ascii_letters) for _ in range(strength))
     org_hash = get_hash(org_pass, sha224)
 
-    print(org_pass)
+    # org_hash = '090ec244dc136b692f252ea2409b9c499794f2db7b37da089dcc9b8a'
 
     passwords = product(alphabet, repeat=strength)
     poss_pass = brute(passwords, org_hash)
 
-    print(poss_pass)
+    print(f"\nThe password: {poss_pass}")
 
 
 if __name__ == '__main__':
     start = time.time()
-    main()
-    print("--- %s seconds ---" % (round((time.time() - start), 5)))
+
+    with Loader("Cracking..."):
+        main()
+
+    print(f"--- {round((time.time() - start), 5)} seconds ---")
