@@ -1,5 +1,5 @@
-from itertools import product, islice
 from multiprocessing import Pool, cpu_count
+from itertools import product, islice
 from random import SystemRandom
 from hashlib import sha224
 from Loader import Loader
