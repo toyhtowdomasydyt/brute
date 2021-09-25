@@ -27,13 +27,13 @@ def brute(passwords, org_hash):
 
 def main():
     alphabet = string.ascii_letters
-    strength = 4
+    strength = 5
 
-    # Generate password and its hash
-    org_pass = ''.join(SystemRandom().choice(string.ascii_letters) for _ in range(strength))
-    org_hash = get_hash(org_pass, sha224)
+    # Generate password and its hash (needs SystemRandom method from random module)
+    # org_pass = ''.join(SystemRandom().choice(string.ascii_letters) for _ in range(strength))
+    # org_hash = get_hash(org_pass, sha224)
 
-    # org_hash = '090ec244dc136b692f252ea2409b9c499794f2db7b37da089dcc9b8a'
+    org_hash = '090ec244dc136b692f252ea2409b9c499794f2db7b37da089dcc9b8a'
 
     with Loader("Cracking..."):
         passwords = product(alphabet, repeat=strength)
@@ -44,5 +44,7 @@ def main():
 
 if __name__ == '__main__':
     start = time.time()
+
     main()
+
     print(f"--- {round((time.time() - start), 5)} seconds ---")
